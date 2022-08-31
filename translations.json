@@ -1,0 +1,94 @@
+{
+  "Can you check if your microphone is on, please?": {
+    "ru": "Проверьте, пожалуйста, включен ли ваш микрофон",
+    "en": "Can you check if your microphone is on, please?"
+  },
+  "Command not found": {
+    "ru": "Команда не найдена",
+    "en": "Command not found"
+  },
+  "Here is what I found for: {} on youtube": {
+    "ru": "Вот, что я нашла по запросу {} на youtube",
+    "en": "Here is what I found for {} on youtube"
+  },
+  "What did you say again?": {
+    "ru": "Извините, что вы сказали?",
+    "en": "What did you say again?"
+  },
+  "Can you repeat, please?": {
+    "ru": "Не могли бы вы повторить еще раз, пожалуйста",
+    "en": "Can you repeat, please?"
+  },
+  "Hello, {}! How can I help today?": {
+    "ru": "Привет, {}! Чем могу помочь?",
+    "en": "Hello, {}! How can I help today?"
+  },
+  "Good day to you, {}! How can I help today?": {
+    "ru": "Добрый день, {}! Как я могу помочь вам сегодня?",
+    "en": "Good day to you, {}! How can I help today?"
+  },
+  "See you soon, {}!": {
+    "ru": "До скорой встречи, {}!",
+    "en": "See you soon, {}!"
+  },
+  "Goodbye, {}! Have a nice day!": {
+    "ru": "До свидания, {}! Хорошего вам дня!",
+    "en": "Goodbye, {}! Have a nice day!"
+  },
+  "Here is what I found for: {} on google": {
+    "ru": "Вот что нашлось по запросу: {} в гугл",
+    "en": "Here is what I found for: {} on google"
+  },
+  "Seems like we have a trouble. See logs for more information": {
+    "ru": "Кажется, появились некоторые трудности. Более подробная информация доступна в логах",
+    "en": "Seems like we have a trouble. See logs for more information"
+  },
+  "Can't find {} on Wikipedia. But here is what I found on google": {
+    "ru": "Не могу найти определение {} в википедии. Но вот, что нашлось в гугл",
+    "en": "Can't find {} on Wikipedia. But here is what I found on google"
+  },
+  "Here is what I found for {} on Wikipedia": {
+    "ru": "Вот что нашлось по запросу: {} в википедии",
+    "en": "Here is what I found for {} on Wikipedia"
+  },
+  "Weather information in {1}": {
+    "ru": "Информация о погоде в городе {1}",
+    "en": "Weather information in {1}"
+  },
+  "The temperature is {} degrees Celsius": {
+    "ru": "Температура {} по Цельсию",
+    "en": "The temperature is {} degrees Celsius"
+  },
+  "The wind speed is {} meters per second": {
+    "ru": "Скорость ветра {} метра в секунду",
+    "en": "The wind speed is {} meters per second"
+  },
+  "The pressure is {} mm Hg": {
+    "ru": "Давление {} миллиметров ртутного столба",
+    "en": "The pressure is {} mm Hg"
+  },
+  "Here is what I found for {} on social nets": {
+    "ru": "Вот что нашлось по запросу: {} во вконтакте",
+    "en": "Here is what I found for {} on social nets"
+  },
+  "tails": {
+    "ru": "решка",
+    "en": "tails"
+  },
+  "heads": {
+    "ru": "орёл",
+    "en": "heads"
+  },
+  "won": {
+    "ru": "победил",
+    "en": "won"
+  },
+  "": {
+    "ru": "",
+    "en": ""
+  },
+  "": {
+    "ru": "",
+    "en": ""
+  }
+}
