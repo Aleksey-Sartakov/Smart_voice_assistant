@@ -302,8 +302,7 @@ def get_translation(*args: list):
             assistant.speech_language = person.native_language
             setup_assistant_voice()
         else:
-            translation_result = google_translator.translate(search_term, dest=person.target_language,
-                                                             src=person.native_language)
+            translation_result = google_translator.translate(search_term, dest=person.target_language, src=person.native_language)
 
             play_voice_assistant_speech("По английски {} будет".format(search_term))
 
@@ -376,7 +375,7 @@ def get_weather_forecast(*args: list):
     """))
 
     # Допольнительно озвучивание информации о погоде ассистентом
-    play_voice_assistant_speech(translator.get("Weather information in {1}").format(city))
+    play_voice_assistant_speech(translator.get("Weather information in {}").format(city))
     play_voice_assistant_speech(translator.get("The wind speed is {} meters per second").format(str(wind_speed)))
     play_voice_assistant_speech(translator.get("The temperature is {} degrees Celsius").format(str(temperature)))
     play_voice_assistant_speech(translator.get("The pressure is {} mm Hg").format(str(pressure)))
@@ -409,7 +408,7 @@ def toss_coin(*args):
     """
     flips_count, heads, tails = 8, 0, 0
 
-    for flip in flips_count:
+    for flip in range(flips_count):
         if random.randint(0,1)==0:
             heads+=1
 
@@ -505,14 +504,10 @@ if __name__ == "__main__":
             # пока не будет найдено совпадение
             if len(voice_input_parts) > 1:
                 for guess in range(len(voice_input_parts)):
-                    print("guess = ", guess)
-                    print("string = ", " ".join(voice_input_parts[0:guess + 1]).strip())
                     intent = get_intent(" ".join(voice_input_parts[0:guess + 1]).strip())
-                    print(intent)
 
                     if intent:
                         command_options = voice_input_parts[guess + 1: len(voice_input_parts)]
-                        print(command_options)
                         config["intents"][intent]["responses"](command_options)
                         break
 

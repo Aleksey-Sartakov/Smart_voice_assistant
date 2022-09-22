@@ -51,9 +51,9 @@
     "ru": "Вот что нашлось по запросу: {} в википедии",
     "en": "Here is what I found for {} on Wikipedia"
   },
-  "Weather information in {1}": {
-    "ru": "Информация о погоде в городе {1}",
-    "en": "Weather information in {1}"
+  "Weather information in {}": {
+    "ru": "Информация о погоде в городе {}",
+    "en": "Weather information in {}"
   },
   "The temperature is {} degrees Celsius": {
     "ru": "Температура {} по Цельсию",
