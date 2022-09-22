@@ -1,0 +1,9 @@
+PyAudio
+google
+SpeechRecognition
+wikipedia-api
+googletrans==3.1.0a0
+pyttsx3
+pyowm
+termcolor
+python-dotenv
