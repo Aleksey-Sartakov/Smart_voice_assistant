@@ -12,6 +12,7 @@ import webbrowser  # работа с браузером по умолчанию 
 import pyttsx3  # синтез речи (Текст в голос)
 import speech_recognition  # распознование пользовательской речи (Голос в текст)
 import wikipediaapi
+import requests
 
 
 class Translation:
@@ -216,11 +217,11 @@ def search_for_term_on_google(*args: tuple):
     # Альтернативный поиск с автоматическим открытием ссылки на первый результат
     search_results = []
     try:
-        for res in search(search_term, # что искать
-                          tld="com", # верхнеуровневый домен
-                          lang=assistant.speech_language, # используется язык, на котором говорит ассистент
-                          stop=1, # индекс последнего извлекаемого результата (будет открыт только первый результат)
-                          pause=0.5, # задержка между http-запросами
+        for res in search(search_term,  # что искать
+                          tld="com",  # верхнеуровневый домен
+                          lang=assistant.speech_language,  # используется язык, на котором говорит ассистент
+                          stop=1,  # индекс последнего извлекаемого результата (будет открыт только первый результат)
+                          pause=0.5,  # задержка между http-запросами
                           ):
             search_results.append(res)
             webbrowser.get().open(res)
@@ -295,14 +296,16 @@ def get_translation(*args: list):
     old_assistant_language = assistant.speech_language
     try:
         if assistant.speech_language != person.native_language:
-            translation_result = google_translator.translate(search_term, dest=person.native_language, src=assistant.speech_language)
+            translation_result = google_translator.translate(search_term, dest=person.native_language,
+                                                             src=assistant.speech_language)
 
             play_voice_assistant_speech("The translation for {} in Russian is".format(search_term))
 
             assistant.speech_language = person.native_language
             setup_assistant_voice()
         else:
-            translation_result = google_translator.translate(search_term, dest=person.target_language, src=person.native_language)
+            translation_result = google_translator.translate(search_term, dest=person.target_language,
+                                                             src=person.native_language)
 
             play_voice_assistant_speech("По английски {} будет".format(search_term))
 
@@ -347,24 +350,53 @@ def get_weather_forecast(*args: list):
         city = args[0][0]
 
     try:
-        # Использование API-ключа, помещенного в .env-файл
+        """# Использование API-ключа, помещенного в .env-файл
         weather_api_key = os.getenv("WEATHER_API_KEY")
         open_weather_map = OWM(weather_api_key)
 
         # Запрос данных о текущем состоянии погоды
         weather_manager = open_weather_map.weather_manager()
         observation = weather_manager.weather_at_place(city)
-        weather = observation.weather
+        weather = observation.weather"""
 
-    except:
-        play_voice_assistant_speech(translator.get("Seems like we have a trouble. See logs for more information"))
+        # Использование API-ключа, помещенного в .env-файл
+        weather_api_key = os.getenv("WEATHER_API_KEY")
+        # Обращение к API с передачей параметров: города и API-ключа
+        geo_inf = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={weather_api_key}")
+
+        # Обработка возвращенного ответа
+        if geo_inf.status_code != 200:
+            play_voice_assistant_speech(translator.get(
+                "Seems like we have a trouble. Error code {}").format(str(geo_inf.status_code)))
+            return
+
+        # Получение координат города
+        geo_inf = geo_inf.json()[0]
+        lat, lon = geo_inf["lat"], geo_inf["lon"]
+
+        # Запрос к API для получения информации о погоде по переданным координатам
+        weather = requests.get(
+            f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weather_api_key}")
+
+        if weather.status_code != 200:
+            play_voice_assistant_speech(translator.get(
+                "Seems like we have a trouble. Error code {}").format(str(weather.status_code)))
+            return
+
+        weather = weather.json()
+
+    except ConnectionError:
+        play_voice_assistant_speech(translator.get("I can't establish a connection with the server"))
         traceback.print_exc()
         return
 
+    kelvin_offset = 273.15
+
     # Разбивание данных на части для удобства работать с ними
-    temperature = weather.temperature("celsius")["temp"]
-    wind_speed = weather.wind()["speed"]
-    pressure = int(weather.pressure["press"] / 1.333) # Переведено из гПА в мм рт.ст.
+    temperature = weather["main"]["temp"] - kelvin_offset  # Переведено из Кельвинов и Цельсии
+    temperature = float("{0:.2f}".format(temperature))
+    wind_speed = weather["wind"]["speed"]
+    pressure = int(weather["main"]["pressure"] / 1.333)  # Переведено из гПА в мм рт.ст.
 
     # Вывод информации о погоде в логах
     print(colored(f"""
@@ -409,8 +441,8 @@ def toss_coin(*args):
     flips_count, heads, tails = 8, 0, 0
 
     for flip in range(flips_count):
-        if random.randint(0,1)==0:
-            heads+=1
+        if random.randint(0, 1) == 0:
+            heads += 1
 
     tails = flips_count - heads
     if tails > heads:
@@ -479,7 +511,6 @@ config = {
 
     "failure_phrases": play_failure_phrase
 }
-
 
 if __name__ == "__main__":
     make_preparations()
