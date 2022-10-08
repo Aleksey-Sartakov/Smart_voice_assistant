@@ -83,6 +83,18 @@
     "ru": "победил",
     "en": "won"
   },
+  "Seems like we have a trouble. Error code {}": {
+    "ru": "Кажется, появились некоторые трудности. Код ошибки {}",
+    "en": "Seems like we have a trouble. Error code {}"
+  },
+  "I can't establish a connection with the server": {
+    "ru": "Не могу установить соединение с сервером",
+    "en": "I can't establish a connection with the server"
+  },
+  "": {
+    "ru": "",
+    "en": ""
+  },
   "": {
     "ru": "",
     "en": ""

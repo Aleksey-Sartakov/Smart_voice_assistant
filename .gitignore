@@ -1,4 +1,4 @@
 .idea/*
 
-**/*.google-cookie
-**/*.env
+**/.google-cookie
+**/.env

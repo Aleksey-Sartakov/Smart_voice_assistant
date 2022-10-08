@@ -3,7 +3,8 @@ google
 SpeechRecognition
 wikipedia-api
 googletrans==3.1.0a0
-pyttsx3
-pyowm
-termcolor
-python-dotenv
+pyttsx3~=2.90
+pyowm~=3.3.0
+termcolor~=2.0.0
+python-dotenv~=0.21.0
+requests~=2.28.1
